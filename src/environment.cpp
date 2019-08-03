@@ -125,13 +125,13 @@ std::vector<std::vector<int>> euclideanCluster(std::vector<std::vector<float>> p
 	std::vector<std::vector<int>> clusters;
 	std::vector<bool> processed(points.size(), false);//all vector element is initialized by 'false'.
 	
-		for(int i=0; i<points.size(); i++){
-			if( processed[i] != true ){
-				std::vector<int> cluster;
-				Proximity(i, points, cluster, processed, tree, distanceTol);
-				clusters.push_back(cluster);
-			}
+	for(int i=0; i<points.size(); i++){
+		if( processed[i] != true ){
+			std::vector<int> cluster;
+			Proximity(i, points, cluster, processed, tree, distanceTol);
+			clusters.push_back(cluster);
 		}
+	}
 	return clusters;
 }
 
@@ -194,7 +194,6 @@ std::unordered_set<int> RansacI(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int m
 			inliersResult.insert(index);
 		}
 	}
-
 	return inliersResult;
 }
 
@@ -211,7 +210,6 @@ void cityBlock_stream(pcl::visualization::PCLVisualizer::Ptr &viewer, ProcessPoi
     //--------- HyperParamters -----------//
     int maxIterations = 200;
     float distanceTol = 0.5;
-
     //------------------------------------//
 
     // PCL's built segmentaion
@@ -221,8 +219,8 @@ void cityBlock_stream(pcl::visualization::PCLVisualizer::Ptr &viewer, ProcessPoi
 
     // Project: Ransac segmentation
     std::unordered_set<int> inliers = RansacI(filteredCloud, maxIterations, distanceTol);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudInliers(new pcl::PointCloud<pcl::PointXYZ>());
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudOutliers(new pcl::PointCloud<pcl::PointXYZ>());
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloudInliers(new pcl::PointCloud<pcl::PointXYZ>());
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloudOutliers(new pcl::PointCloud<pcl::PointXYZ>());
 
 	for(int index = 0; index < filteredCloud->points.size(); index++) {
 		pcl::PointXYZ point = filteredCloud->points[index];
@@ -292,9 +290,7 @@ void cityBlock_stream(pcl::visualization::PCLVisualizer::Ptr &viewer, ProcessPoi
 //setAngle: SWITCH CAMERA ANGLE {XY, TopDown, Side, FPS}
 void initCamera(CameraAngle setAngle, pcl::visualization::PCLVisualizer::Ptr& viewer)
 {
-
     viewer->setBackgroundColor (0, 0, 0);
-    
     // set camera position and angle
     viewer->initCameraParameters();
     // distance away in meters
@@ -327,7 +323,6 @@ int main (int argc, char** argv)
     pcl::PointCloud<pcl::PointXYZ>::Ptr inputCloud;
 
     //cityBlock(viewer);
-
     while (!viewer->wasStopped ())
     {
         viewer->removeAllPointClouds();
