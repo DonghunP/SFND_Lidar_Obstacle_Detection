@@ -9,7 +9,6 @@
 #include "processPointClouds.cpp"
 
 #include "quiz/ransac/kdtree.h"
-//#include "quiz/ransac/ransac3d.cpp"
 #include <unordered_set>
 
 /*
@@ -276,9 +275,7 @@ void cityBlock_stream(pcl::visualization::PCLVisualizer::Ptr &viewer, ProcessPoi
     for (std::vector<int> cluster : cloudClusters){
         pcl::PointCloud<pcl::PointXYZ>::Ptr clusterCloud(new pcl::PointCloud<pcl::PointXYZ>());
         for (int indice: cluster){
-            clusterCloud->points.push_back(pcl::PointXYZ(points_input[indice][0], 
-                                                          points_input[indice][1], 
-                                                          points_input[indice][2]));
+            clusterCloud->points.push_back(pcl::PointXYZ(points_input[indice][0], points_input[indice][1], points_input[indice][2]));
         }
         renderPointCloud(viewer, clusterCloud, "cluster"+std::to_string(clusterId), colors[clusterId%3]);
         Box box = pointProcessor->BoundingBox(clusterCloud);
