@@ -1,3 +1,5 @@
+[AI for robotics](https://classroom.udacity.com/courses/cs373)
+---
 # Sensor Fusion Self-Driving Car Course
 
 <img src="media/ObstacleDetectionFPS.gif" width="700" height="400" />
